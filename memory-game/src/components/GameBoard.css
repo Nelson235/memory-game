@@ -1,0 +1,10 @@
+/* GameBoard.css */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas */
+    gap: 10px; /* Espaciado entre cartas */
+    grid-auto-rows: 100px; /* Altura fija para las filas */
+    justify-items: center; /* Centra las cartas horizontalmente */
+    align-items: center; /* Centra las cartas verticalmente */
+  }
+  

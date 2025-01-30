@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import GameBoard from "./components/GameBoard";
+import Header from "./components/Header"; // ✅ Ya contiene el título y el Timer
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [gameStarted, setGameStarted] = useState(false);
+  const [score, setScore] = useState(0);
+
+  const startGame = () => {
+    setScore(0);
+    setGameStarted(true);
+  };
+
+  const onRestart = () => {
+    setScore(0);
+    setGameStarted(false);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="app flex flex-col items-center justify-center min-h-screen">
+      <h1 className="text-4xl font-bold mb-4">Memory Game</h1>
+      {!gameStarted ? (
+        <button
+          onClick={startGame}
+          className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+        >
+          Play
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      ) : (
+        <>
+          <Header gameStarted={gameStarted} score={score} onRestart={onRestart} />
+          <div className="mt-4">
+            <GameBoard />
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
-export default App
+export default App;
+
